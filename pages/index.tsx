@@ -2,14 +2,14 @@ import Head from 'next/head'
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+    <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-yellow-500">
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">
+        <h1 className="text-6xl font-thin focus:ring hover:ring-4 ring-black">
           Welcome to{' '}
           <a className="text-blue-600" href="https://nextjs.org">
             Next.js!
@@ -36,7 +36,7 @@ export default function Home() {
 
           <a
             href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
+            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-red-600 focus:text-blue-600"
           >
             <h3 className="text-2xl font-bold">Learn &rarr;</h3>
             <p className="mt-4 text-xl">
@@ -65,18 +65,6 @@ export default function Home() {
           </a>
         </div>
       </main>
-
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
-      </footer>
     </div>
   )
 }
