@@ -20,17 +20,25 @@ module.exports = {
       },
       typography: {
         DEFAULT: {
-          // css: {
-          //   color: '#333',
-          //   strong: {
-          //     fontWeight: '800',
-          //   },
-          //   fontSize: '1.875rem',
-          //   h1: {
-          //     fontSize: '4rem',
-          //   }
-          //   ...
-          // },
+          css: {
+            // color: '#333',
+            // strong: {
+            //   fontWeight: '800',
+            // },
+            // fontSize: '1.875rem',
+            // h1: {
+            //   fontSize: '4rem',
+            // }
+            prose:{
+              code:{
+                color: 'red'
+              }
+            },
+            code:{
+              color: 'blue'
+            }
+          
+          },
         },
       },
     },

@@ -12,12 +12,12 @@ type Props = {
 export default function Movie({children, posts}:Props) {
   console.log(posts)
   return (
-    <div className="flex flex-col justify-start min-h-screen py-2 bg-yellow-100">
+    <div className="flex flex-col justify-start min-h-screen py-2 ">
       <Head>
         <title>movie page</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <article className="prose-sm mobile:prose p-7 mx-auto">
+      <article className="prose p-7 mx-auto">
         <div dangerouslySetInnerHTML={{__html: marked(posts)}}></div>
       </article>
       
