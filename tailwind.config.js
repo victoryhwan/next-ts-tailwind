@@ -17,11 +17,28 @@ module.exports = {
       screens: {
         'mobile' : '375px'
         
-      }
+      },
+      typography: {
+        DEFAULT: {
+          // css: {
+          //   color: '#333',
+          //   strong: {
+          //     fontWeight: '800',
+          //   },
+          //   fontSize: '1.875rem',
+          //   h1: {
+          //     fontSize: '4rem',
+          //   }
+          //   ...
+          // },
+        },
+      },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }
