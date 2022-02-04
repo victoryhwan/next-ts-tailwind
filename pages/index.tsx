@@ -1,70 +1,70 @@
 import Head from 'next/head'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import Sidebar from '../components/Sidebar'
+import React, { ReactNode } from 'react'
+import { GetStaticPaths, GetStaticProps } from 'next';
+import {getAllPostDir} from '../utils/mdxUtils'
 
-export default function Home() {
+type Props = {
+  postDirArr?: []
+}
+
+export default function Home({postDirArr}:Props) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-yellow-500">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-6xl font-thin focus:ring hover:ring-4 ring-black">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.js
-          </code>
-        </p>
-
-        <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-red-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+    <div className="">
+      <Header/>
+      {/* <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-yellow-500"> */}
+        <div className="container mx-auto max-w-7xl">
+            <div className="lg:flex">
+                <Sidebar postList={postDirArr}/>
+                <div className="min-w-0 flex-auto px-4 sm:px-6 xl:px-8 pt-10 pb-24 lg:pb-16">
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-8">
+                    <Section/>
+                    <Section/>
+                    <Section/>
+                    <Section/>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-8 my-10">
+                    <Section/>
+                    <Section/>
+                    <Section/>
+                    <Section/>
+                  </div>
+                </div>
+            </div>
         </div>
-      </main>
+      <Footer/>
     </div>
+  )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  
+  // console.log(getAllPostDir())
+  let postDirArr = getAllPostDir()
+  return {
+    props: {
+      postDirArr
+    }
+  }
+}
+
+function Section () {
+
+  return (
+    <section className="flex">
+      <div className="w-full relative text-black overflow-hidden rounded-2xl flex shadow-lg border border-gray-200 hover:border-red-200 hover:bg-red-200">
+        <div className="w-full flex md:flex-col">
+          <div className="sm:max-w-sm sm:flex-none md:w-auto md:flex-auto flex flex-col items-start relative z-10 p-6 xl:p-8">
+            <h2 className="text-xl font-semibold mb-2 text-shadow">Try it in the browser</h2>
+            <p className="font-medium text-rose-100 text-shadow mb-4">Build something with Tailwind in our online playground.</p>
+            <a href="https://play.tailwindcss.com/" className="mt-auto bg-rose-900 bg-opacity-50 hover:bg-opacity-75 transition-colors duration-200 rounded-xl font-semibold py-2 px-4 inline-flex">{`return`}</a>
+          </div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-rose-500 hidden sm:block"></div>
+      </div>
+    </section>
   )
 }

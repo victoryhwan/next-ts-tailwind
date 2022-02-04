@@ -6,7 +6,7 @@
 ###### victory hwan
 
 ### 코드블럭
-```js
+```html
 let result = $('#result').val();
 ```
 
