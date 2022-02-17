@@ -5,4 +5,5 @@ module.exports = {
     //     domains: [links.papareact.com]
     // }
     //basePath: '/docs', // 기본경로 설정 , /about요청시 /docs/about 으로 요청된다.
+    //test
 }
