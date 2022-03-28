@@ -5,19 +5,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import Sidebar from '../components/Sidebar'
+import Header from '../../../components/Header'
+import Footer from '../../../components/Footer'
+import Sidebar from '../../../components/Sidebar'
 import mdxPrism from 'mdx-prism';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import React, { ReactNode } from 'react'
 import marked from 'marked'
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { PostType } from '../types/post';
+import { PostType } from '../../../types/post';
 import { MDXRemote, MDXRemoteSerializeResult,} from 'next-mdx-remote';
 
-import {getAllPostDir} from '../utils/mdxUtils'
+import {getAllPostDir} from '../../../utils/mdxUtils'
 
 const components = {
   Head,
@@ -25,34 +25,21 @@ const components = {
   Link,
 };
 
-// type Props = {
-//   children?: ReactNode,
-//   posts?: object
-// }
-
 type PostPageProps = {
   source: MDXRemoteSerializeResult;
   postDirArr?: []
-  // frontMatter: PostType;
 };
+
+// type Params = {
+//   params: {
+//     slug:String
+//   }
+// }
 
 // export default function Post({source, frontMatter}:PostPageProps) {
   const PostPage = ({ source, postDirArr }: PostPageProps) => {
   // console.log(posts)
   return (
-    // <div className="flex flex-col justify-start min-h-screen py-2 ">
-    //   <Head>
-    //     <title>post2 page</title>
-    //     <link rel="icon" href="/favicon.ico" />
-    //   </Head>
-    //   {/* <article className="prose prose-indigo p-7 mx-auto max-w-max">
-    //     <div dangerouslySetInnerHTML={{__html: marked(posts)}}></div>
-    //   </article> */}
-    //   <div className="prose dark:prose-dark p-7 mx-auto max-w-max">
-    //       <MDXRemote {...source} components={components}/>
-    //     </div>
-    // </div>
-
     <div>
       <Header/>
       <div className="container mx-auto max-w-7xl">
@@ -70,21 +57,42 @@ type PostPageProps = {
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  
-  const files = fs.readdirSync(path.join('posts'), {withFileTypes: true})
-  
-  // console.log(files) //posts폴더의 파일명들이 나옴
+export async function getStaticPaths() {
 
-  files.forEach((item)=>{
-      if(item.isDirectory()){
-          console.log(`${item.name} is Dir`)
-      }
+  // paths는 정적 페이지를 path를 미리 정의하는 곳이다. 
+  const paths = []
+
+  let postDirArr = getAllPostDir()
+
+  postDirArr.forEach((categoryInfo)=>{
+    categoryInfo.posts.forEach((post)=>{
+      paths.push({ params: { 
+        category: categoryInfo.name,
+        slug: post.substring(0,post.length-4)}})
+    })
   })
-  console.log(getAllPostDir())
+  
+  return {
+    paths,
+    fallback: false
+  }
+}
 
-  const postContent = fs.readFileSync(path.join('posts', files[1].name))
+export const getStaticProps: GetStaticProps = async (params) => {
 
+  console.log(`getStaticProps params : ${JSON.stringify(params)}`)
+  let fileName = params.params.slug.toString()+".mdx"
+
+  // const files = fs.readdirSync(path.join('posts'), {withFileTypes: true})
+  // // console.log(files) //posts폴더의 파일명들이 나옴
+  // files.forEach((item)=>{
+  //     if(item.isDirectory()){
+  //         console.log(`${item.name} is Directory (exist)`)
+  //     }
+  // })
+  // console.log(`files[0].name : ${files[0].name}`)
+
+  const postContent = fs.readFileSync(path.join(`posts/${params.params.category}`, fileName)) //posts/react 디렉토리에 있는 파일을 읽음.
   const { content, data } = matter(postContent);
   const mdxSource = await serialize(content, {
     // Optionally pass remark/rehype plugins
@@ -96,14 +104,11 @@ export const getStaticProps: GetStaticProps = async () => {
   });
 
   let postDirArr = getAllPostDir()
-  console.log(postDirArr)
+  // console.log(`postDirArr : ${JSON.stringify(postDirArr)}`)
   return {
     props: {
       source: mdxSource,
-      // frontMatter: data,
-      postDirArr: postDirArr
-      
-    // fallback: false,
+      postDirArr: postDirArr //사이드메뉴 리스트 정보
     }
   }
 }

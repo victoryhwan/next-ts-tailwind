@@ -15,9 +15,12 @@ export const getAllPostDir = () =>{
   const postDir = fs.readdirSync(POSTS_PATH, {withFileTypes: true})
                     .filter(item => item.isDirectory())
                     .map(item => {
+
+                      let posts = getPosts(item.name)
                       return {
                         name: item.name,
-                        postCnt: getPosts(item.name)
+                        postCnt: posts.count,
+                        posts: posts.posts
                       }
                     })
 
@@ -31,6 +34,11 @@ export const getPosts = (dir: string)=>{
   .filter((path) => /\.mdx?$/.test(path))
   .length
 
-  return count
+  let posts = fs.readdirSync(path.join(POSTS_PATH, dir))
+
+  return {
+    count : count,
+    posts : posts
+  }
 }
 

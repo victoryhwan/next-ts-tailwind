@@ -21,16 +21,16 @@ export default function Home({postDirArr}:Props) {
                 <div className="min-w-0 flex-auto px-4 sm:px-6 xl:px-8 pt-10 pb-24 lg:pb-16">
                   
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-8">
-                    <Section/>
-                    <Section/>
-                    <Section/>
-                    <Section/>
+                    <Section key={1}/>
+                    <Section key={2}/>
+                    <Section key={3}/>
+                    <Section key={4}/>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-8 my-10">
-                    <Section/>
-                    <Section/>
-                    <Section/>
-                    <Section/>
+                    <Section key={5}/>
+                    <Section key={6}/>
+                    <Section key={7}/>
+                    <Section key={8}/>
                   </div>
                 </div>
             </div>

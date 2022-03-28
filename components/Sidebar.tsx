@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react'
+import Link from 'next/link';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import {getAllPostDir} from '../utils/mdxUtils'
 
@@ -6,13 +7,19 @@ import fs from 'fs';
 import path from 'path';
 
 type Props = {
-    children?: ReactNode
-    p_title?: string
+    children?: SideProps
+}
+
+type SideProps = {
+    title: string;
+    gubun: string;
+    path: string;
 }
 
 type PostItem = {
     name?: string
     postCnt?: number
+    posts?: []
 }
 
 type PostListProps = {
@@ -24,7 +31,21 @@ const Sidebar = ({postList}:PostListProps)=>{
     const rendering = () => {
         const rs = []
         for(let i=0; i<postList.length; i++){
-            rs.push(<SideBar_li key={i}>{`${postList[i].name}[${postList[i].postCnt}]`}</SideBar_li>);
+            let obj = {
+                title : `${postList[i].name}[${postList[i].postCnt}]`,
+                gubun : "category",
+                path : ""
+            }
+            rs.push(<SideBar_li key={i}>{obj}</SideBar_li>);
+            for(let j=0; j<postList[i].posts.length; j++){
+                let subTitle = postList[i].posts[j]+ ""
+                let subObj = {
+                    title : subTitle.substring(0,subTitle.length-4),
+                    gubun : "post",
+                    path : postList[i].name
+                }
+                rs.push(<SideBar_li key={`post${postList[i].name}_${j}`}>{subObj}</SideBar_li>);
+            }
         }
         return rs
     }
@@ -46,27 +67,8 @@ const Sidebar = ({postList}:PostListProps)=>{
                     <div id="nav" className="px-1 pt-6 overflow-y-auto font-medium text-base sm:px-3 xl:px-5 lg:text-sm pb-10 lg:pt-10 lg:pb-14 sticky?lg:h-(screen-18)">
                         <ul>
                             <li className="mt-8">
-                                <h5 className="px-3 mb-3 lg:mb-3 uppercase tracking-wide font-semibold text-sm lg:text-xs text-gray-900">Getting started</h5>
+                                <h5 className="px-3 mb-3 lg:mb-3 uppercase tracking-wide font-semibold text-sm lg:text-xs text-gray-900">contents index list</h5>
                                 <ul>
-                                    <SideBar_li p_title="이기환">Installation</SideBar_li>
-                                    <SideBar_li>Release Notes</SideBar_li>
-                                    <SideBar_li>Upgrade Guide</SideBar_li>
-                                    <SideBar_li>Editor Support</SideBar_li>
-                                    <SideBar_li>Using with Preprocessorse</SideBar_li>
-                                    <SideBar_li>Optimizing for Production</SideBar_li>
-                                    <SideBar_li>Browser Support</SideBar_li>
-                                    <SideBar_li>Release Notes</SideBar_li>
-                                    <SideBar_li>Upgrade Guide</SideBar_li>
-                                    <SideBar_li>Editor Support</SideBar_li>
-                                    <SideBar_li>Using with Preprocessorse</SideBar_li>
-                                    <SideBar_li>Optimizing for Production</SideBar_li>
-                                    <SideBar_li>Browser Support</SideBar_li>
-                                    <SideBar_li>Release Notes</SideBar_li>
-                                    <SideBar_li>Upgrade Guide</SideBar_li>
-                                    <SideBar_li>Editor Support</SideBar_li>
-                                    <SideBar_li>Using with Preprocessorse</SideBar_li>
-                                    <SideBar_li>Optimizing for Production</SideBar_li>
-                                    <SideBar_li>Browser Support</SideBar_li>
                                     {rendering()}
                                 </ul>
                             </li>
@@ -78,17 +80,31 @@ const Sidebar = ({postList}:PostListProps)=>{
     )
 }
 
-function SideBar_li ({children, p_title=''}: Props){
-    return (
-        <li>
-            <a className="px-3 py-2 transition-colors duration-200 relative block hover:text-gray-900 hover:bg-yellow-200 text-gray-500 rounded-md" href="https://github.com/tailwindlabs/tailwindcss/releases">
-                {/* <span className="rounded-md absolute inset-0 bg-cyan-50 opacity-0">zz</span> */}
-                <span className="relative">{children+p_title}</span>
-            </a>
-        </li>
-    )
+function SideBar_li ({children}: Props){
 
+    let title = children.title
 
+    if(children.gubun == 'category'){
+        return (
+            <li>
+                <a className="px-3 py-2 transition-colors duration-200 relative block text-gray-500 rounded-md">
+                    {/* <span className="rounded-md absolute inset-0 bg-cyan-50 opacity-0">zz</span> */}
+                    <span className="relative">{children.title}</span>
+                </a>
+            </li>
+        )
+    }else{
+        return (
+            <li>
+                <Link href={`/post/${children.path}/${children.title}`}>
+                    <a className="px-7 py-2 transition-colors duration-200 relative block hover:text-gray-900 hover:bg-yellow-200 text-gray-500 rounded-md">
+                        {/* <span className="rounded-md absolute inset-0 bg-cyan-50 opacity-0">zz</span> */}
+                        <span className="relative">{children.title}</span>
+                    </a>
+                </Link>
+            </li>
+        )
+    }
 }
 export default Sidebar
 // 
