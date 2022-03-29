@@ -1,0 +1,8 @@
+.header {
+    /* sticky w-full top-0 z-50 grid grid-cols-3 bg-white mx-auto h-16 lg:h-20 shadow-lg\ */
+    position: sticky;
+    width: 100%;
+    top: 0px;
+    z-index: 50;
+    
+}

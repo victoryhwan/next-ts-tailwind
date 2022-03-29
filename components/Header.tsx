@@ -1,6 +1,6 @@
 import { MenuIcon } from '@heroicons/react/solid'
 import Link from 'next/link';
-
+import styles from "./Header.module.css";
 const Header = ()=>{
     return (
         <header className="sticky w-full top-0 z-50 grid grid-cols-3 bg-white mx-auto h-16 lg:h-20 shadow-lg">            

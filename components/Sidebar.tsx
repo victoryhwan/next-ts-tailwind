@@ -32,7 +32,7 @@ const Sidebar = ({postList}:PostListProps)=>{
         const rs = []
         for(let i=0; i<postList.length; i++){
             let obj = {
-                title : `${postList[i].name}[${postList[i].postCnt}]`,
+                title : `${postList[i].name}(${postList[i].postCnt})`,
                 gubun : "category",
                 path : ""
             }
@@ -87,7 +87,7 @@ function SideBar_li ({children}: Props){
     if(children.gubun == 'category'){
         return (
             <li>
-                <a className="px-3 py-2 transition-colors duration-200 relative block text-gray-500 rounded-md">
+                <a className="px-3 py-2 transition-colors duration-200 relative block text-gray-800 rounded-md">
                     {/* <span className="rounded-md absolute inset-0 bg-cyan-50 opacity-0">zz</span> */}
                     <span className="relative">{children.title}</span>
                 </a>

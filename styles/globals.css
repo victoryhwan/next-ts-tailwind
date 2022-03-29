@@ -23,7 +23,13 @@
 }
 
 .prose code {
-  @apply text-gray-800 dark:text-gray-200 px-1 py-0.5 border border-gray-100 dark:border-gray-800 rounded-md bg-gray-100 dark:bg-gray-900 ;
+  @apply text-gray-800 dark:text-gray-200 px-1 py-0.5  rounded-md bg-gray-100 dark:bg-gray-900 border-pink-500 border-2;
+}
+.prose code::before{
+  content: "";
+}
+.prose code::after{
+  content: "";
 }
 
 .prose img {
