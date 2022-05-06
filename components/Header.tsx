@@ -9,7 +9,7 @@ const Header = ()=>{
             </div>
             <Link href={`/`}>
                 <a className="w-70 items-center mx-auto flex">
-                    <span className="font-bold text-xl w-auto">JustinTory Dev Blog</span>
+                    <span className="font-bold text-xl w-auto">JustinTory</span>
                 </a>
             </Link>
             

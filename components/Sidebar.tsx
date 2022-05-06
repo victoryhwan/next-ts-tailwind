@@ -71,6 +71,23 @@ const Sidebar = ({postList}:PostListProps)=>{
                                 <ul>
                                     {rendering()}
                                 </ul>
+
+                                <ol>
+                                    <li className="toggle">
+                                        <details>
+                                            <summary>CSS first steps</summary>
+                                            <ol>
+                                                <li><a href="/en-US/docs/Learn/CSS/First_steps">CSS first steps overview</a></li>
+                                                <li><a href="/en-US/docs/Learn/CSS/First_steps/What_is_CSS">What is CSS?</a></li>
+                                                <li><a href="/en-US/docs/Learn/CSS/First_steps/Getting_started">Getting started with CSS</a></li>
+                                                <li><a href="/en-US/docs/Learn/CSS/First_steps/How_CSS_is_structured">How CSS is structured</a></li>
+                                                <li><a href="/en-US/docs/Learn/CSS/First_steps/How_CSS_works">How CSS works</a></li>
+                                                <li><a href="/en-US/docs/Learn/CSS/First_steps/Styling_a_biography_page">Using your new knowledge</a></li>
+                                            </ol>
+                                        </details>
+                                    </li>
+
+                                </ol>
                             </li>
                         </ul>
                     </div>
