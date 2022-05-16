@@ -68,7 +68,7 @@ const Header = ()=>{
             </Link>
             
             <div className={`fixed z-[1200] w-full h-[1000px] bg-gray-700 opacity-40 transition ${sideView?'visible':'invisible'}`} onClick={()=>setSideView(!sideView)}></div>
-            <nav className={`fixed z-[1300] w-[300px] h-full bg-yellow-200 opacity-100 ${sideView?'visible':'invisible'}`}>
+            <nav className={`fixed z-[1300] w-[300px] h-full bg-yellow-200 opacity-100 ${sideView?'left-0':'left-[-300px]'} delay-50`}>
                 <div className="h-[50px] items-center mx-auto">
                     <span className="font-bold text-xl w-auto">JustinTory</span>
                 </div>
@@ -121,6 +121,29 @@ const Header = ()=>{
                     </li>
                     <li>
                         <Accordion expanded={expanded[2]} onChange={handleChange(2)}>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel1bh-content"
+                                id="panel3bh-header"
+                                >
+                                <Typography>
+                                    General settings
+                                </Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <ul>
+                                    <li>test</li>
+                                    <li>test</li>
+                                    <li>test</li>
+                                    <li>test</li>
+                                    <li>test</li>
+
+                                </ul>
+                            </AccordionDetails>
+                        </Accordion>
+                    </li>
+                    <li>
+                        <Accordion expanded={expanded[3]} onChange={handleChange(3)}>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1bh-content"
