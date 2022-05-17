@@ -23,7 +23,7 @@
 }
 
 .prose code {
-  @apply text-gray-800 dark:text-gray-200 px-1 py-0.5  rounded-md bg-gray-100 dark:bg-gray-900 border-pink-500 border-2;
+  @apply text-gray-800 dark:text-gray-800 px-1 py-0.5  rounded-md bg-pink-200 dark:bg-yellow-200 border-pink-200 dark:border-yellow-200 border-2;
 }
 .prose code::before{
   content: "";
