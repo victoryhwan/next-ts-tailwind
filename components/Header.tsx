@@ -69,126 +69,129 @@ const Header = ()=>{
             
             <div className={`fixed z-[1200] w-full h-[1000px] bg-gray-700 opacity-40 transition ${sideView?'visible':'invisible'}`} onClick={()=>setSideView(!sideView)}></div>
             <nav className={`fixed z-[1300] w-[300px] h-full bg-yellow-200 opacity-100 ${sideView?'left-0':'left-[-300px]'} delay-50`}>
-                <div className="h-[50px] items-center mx-auto">
+                <div className="h-[50px] items-center mx-auto justify-center">
                     <span className="font-bold text-xl w-auto">JustinTory</span>
                 </div>
-                <ul>
-                    <li>
-                        <Accordion expanded={expanded[0]} onChange={handleChange(0)}>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                // aria-controls="panel1bh-content"
-                                // id="panel1bh-header"
-                                >
-                                <Typography>
-                                    General settings
-                                </Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <ul>
-                                    <li>test</li>
-                                    <li>test</li>
-                                    <li>test</li>
-                                    <li>test</li>
-                                    <li>test</li>
+                <nav className='p-2 overflow-y-auto h-[90%]'>
+                    <ul>
+                        <li>
+                            <Accordion expanded={expanded[0]} onChange={handleChange(0)}>
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    // aria-controls="panel1bh-content"
+                                    // id="panel1bh-header"
+                                    >
+                                    <Typography>
+                                        General settings
+                                    </Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <ul>
+                                        <li>test</li>
+                                        <li>test</li>
+                                        <li>test</li>
+                                        <li>test</li>
+                                        <li>test</li>
 
-                                </ul>
-                            </AccordionDetails>
-                        </Accordion>
-                    </li>
-                    <li>
-                        <Accordion expanded={expanded[1]} onChange={handleChange(1)}>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1bh-content"
-                                id="panel2bh-header"
-                                >
-                                <Typography>
-                                    General settings
-                                </Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <ul>
-                                    <li>test</li>
-                                    <li>test</li>
-                                    <li>test</li>
-                                    <li>test</li>
-                                    <li>test</li>
+                                    </ul>
+                                </AccordionDetails>
+                            </Accordion>
+                        </li>
+                        <li>
+                            <Accordion expanded={expanded[1]} onChange={handleChange(1)}>
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    aria-controls="panel1bh-content"
+                                    id="panel2bh-header"
+                                    >
+                                    <Typography>
+                                        General settings
+                                    </Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <ul>
+                                        <li>test</li>
+                                        <li>test</li>
+                                        <li>test</li>
+                                        <li>test</li>
+                                        <li>test</li>
 
-                                </ul>
-                            </AccordionDetails>
-                        </Accordion>
-                    </li>
-                    <li>
-                        <Accordion expanded={expanded[2]} onChange={handleChange(2)}>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1bh-content"
-                                id="panel3bh-header"
-                                >
-                                <Typography>
-                                    General settings
-                                </Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <ul>
-                                    <li>test</li>
-                                    <li>test</li>
-                                    <li>test</li>
-                                    <li>test</li>
-                                    <li>test</li>
+                                    </ul>
+                                </AccordionDetails>
+                            </Accordion>
+                        </li>
+                        <li>
+                            <Accordion expanded={expanded[2]} onChange={handleChange(2)}>
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    aria-controls="panel1bh-content"
+                                    id="panel3bh-header"
+                                    >
+                                    <Typography>
+                                        General settings
+                                    </Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <ul>
+                                        <li>test</li>
+                                        <li>test</li>
+                                        <li>test</li>
+                                        <li>test</li>
+                                        <li>test</li>
 
-                                </ul>
-                            </AccordionDetails>
-                        </Accordion>
-                    </li>
-                    <li>
-                        <Accordion expanded={expanded[3]} onChange={handleChange(3)}>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1bh-content"
-                                id="panel3bh-header"
-                                >
-                                <Typography>
-                                    General settings
-                                </Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <ul>
-                                    <li>test</li>
-                                    <li>test</li>
-                                    <li>test</li>
-                                    <li>test</li>
-                                    <li>test</li>
+                                    </ul>
+                                </AccordionDetails>
+                            </Accordion>
+                        </li>
+                        <li>
+                            <Accordion expanded={expanded[3]} onChange={handleChange(3)}>
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    aria-controls="panel1bh-content"
+                                    id="panel3bh-header"
+                                    >
+                                    <Typography>
+                                        General settings
+                                    </Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <ul>
+                                        <li>test</li>
+                                        <li>test</li>
+                                        <li>test</li>
+                                        <li>test</li>
+                                        <li>test</li>
 
-                                </ul>
-                            </AccordionDetails>
-                        </Accordion>
-                    </li>
-                    <li>
-                        <Accordion expanded={expanded[3]} onChange={handleChange(3)}>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1bh-content"
-                                id="panel3bh-header"
-                                >
-                                <Typography>
-                                    General settings
-                                </Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <ul>
-                                    <li>test</li>
-                                    <li>test</li>
-                                    <li>test</li>
-                                    <li>test</li>
-                                    <li>test</li>
+                                    </ul>
+                                </AccordionDetails>
+                            </Accordion>
+                        </li>
+                        <li>
+                            <Accordion expanded={expanded[3]} onChange={handleChange(3)}>
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    aria-controls="panel1bh-content"
+                                    id="panel3bh-header"
+                                    >
+                                    <Typography>
+                                        General settings
+                                    </Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <ul>
+                                        <li>test</li>
+                                        <li>test</li>
+                                        <li>test</li>
+                                        <li>test</li>
+                                        <li>test</li>
 
-                                </ul>
-                            </AccordionDetails>
-                        </Accordion>
-                    </li>
-                </ul>
+                                    </ul>
+                                </AccordionDetails>
+                            </Accordion>
+                        </li>
+                    </ul>
+                </nav>
+                
             </nav>
 
         </header>
