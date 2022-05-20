@@ -7,15 +7,13 @@ type Props = {
   }
 
 const Body = ({children}: Props)=>{
-    return (
-        <>            
-            <div className="container mx-auto max-w-7xl">
+    return (   
+            <main className="container mx-auto max-w-7xl">
                 <div className="lg:flex overflow-hidden">
                     <Sidebar />
                     <MainContent>{children}</MainContent>
                 </div>
-            </div>
-        </>
+            </main>
     )
 }
 
