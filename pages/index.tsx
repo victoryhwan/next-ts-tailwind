@@ -14,11 +14,11 @@ export default function Home({postDirArr}:Props) {
   return (
     <div className="">
       <Header/>
-      <Sidebar postList={postDirArr}/>
+      {/* <Sidebar postList={postDirArr}/> */}
       {/* <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-yellow-500"> */}
         <div className="container mx-auto max-w-7xl">
             <div className="lg:flex">
-                
+                <Sidebar postList={postDirArr}/>
                 <div className="min-w-0 flex-auto px-4 sm:px-6 xl:px-8 pt-10 pb-24 lg:pb-16">
                   
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-8">
