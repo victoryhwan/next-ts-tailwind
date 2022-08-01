@@ -67,8 +67,8 @@ const Header = ()=>{
                 </a>
             </Link>
             
-            <div className={`fixed z-[1200] w-full h-[1000px] bg-gray-700 opacity-40 transition ${sideView?'visible':'invisible'}`} onClick={()=>setSideView(!sideView)}></div>
-            <nav className={`fixed z-[1300] w-[300px] h-full bg-yellow-200 opacity-100 ${sideView?'left-0':'left-[-300px]'} delay-50`}>
+            <div className={`fixed top-0 z-[1200] w-full h-[1000px] bg-gray-500 opacity-40 transition ${sideView?'visible':'invisible'}`} onClick={()=>setSideView(!sideView)}></div>
+            <nav className={`fixed top-0 z-[1300] w-[300px] h-full bg-yellow-200 opacity-100 ${sideView?'left-0':'left-[-300px]'} duration-500`}>
                 <div className="h-[50px] items-center mx-auto justify-center">
                     <span className="font-bold text-xl w-auto">JustinTory</span>
                 </div>
