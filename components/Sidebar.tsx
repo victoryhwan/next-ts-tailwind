@@ -7,6 +7,7 @@ import fs from 'fs';
 import path from 'path';
 import Button from '@mui/material/Button';
 import { RiArrowUpSLine } from "react-icons/ri";
+import { BsDot } from "react-icons/bs";
 
 type Props = {
     children?: PostItem
@@ -121,20 +122,20 @@ function AccordionMenu ({children}: Props) {
 
     return (
         <div className="">
-            <div className="flex place-content-between h-10 pl-3 hover:bg-blue-400 hover:rounded-lg">
-                <a href='#' className="self-center text-black ">{summaryTitle}</a>
-                <button className="w-5" onClick={clickedToggle}><RiArrowUpSLine className={`justify-self-end ${toggle?'rotate-180':''}`}/></button>
+            <div className="flex place-content-between h-10 pl-3 hover:rounded-lg hover:font-bold" onClick={clickedToggle}>
+                <div className="self-center text-black ">{summaryTitle}</div>
+                <button className="w-5"><RiArrowUpSLine className={`justify-self-end ${toggle?'rotate-180':''}`}/></button>
             </div>
             <div>
-                <ul className={`p-1 ml-2 ${toggle?'block':'hidden'} ${toggle?'animate-accordian-menu-open':'animate-accordian-menu-close'}`}> 
+                <ul className={`p-1 ml-2 ${toggle?'block':'hidden'} ${toggle?'animate-accordian-menu-open':'animate-accordian-menu-close'} border-l`}> 
                     {
                         children.posts.map((item :String, idx)=>{
                             let title = item.substring(0,item.length-4)
                             return (
                                 <li key={idx}>
                                     <Link href={`/post/${children.name}/${title}`}>
-                                        <a className='side-menu-item'>
-                                            <span className="relative">{title}</span>
+                                        <a className='side-menu-item hover:bg-white hover:font-bold'>
+                                            <span className="relative flex"><BsDot className='self-center'/>{title}</span>
                                         </a>
                                     </Link>
                                 </li>        

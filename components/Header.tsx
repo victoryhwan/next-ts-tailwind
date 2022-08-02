@@ -21,6 +21,7 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { MdKeyboardArrowRight, MdArrowForwardIos } from "react-icons/md";
 import { RiArrowUpSLine } from "react-icons/ri";
+import { BsDot } from "react-icons/bs";
 
 
 type Props = {
@@ -180,12 +181,12 @@ function AccordionMenu ({children}: Props) {
     //${toggle?'block':'hidden'}
     return (
         <div className="bg-white">
-            <div className="flex place-content-between h-10 pl-3 hover:bg-blue-400">
-                <a href='#' className="self-center text-black ">{summaryTitle}</a>
-                <button className="w-5" onClick={clickedToggle}><RiArrowUpSLine className={`justify-self-end ${toggle?'rotate-180':''}`}/></button>
+            <div className="flex place-content-between h-10 pl-3 hover:rounded-lg hover:font-bold" onClick={clickedToggle}>
+                <div className="self-center text-black ">{summaryTitle}</div>
+                <button className="w-5"><RiArrowUpSLine className={`justify-self-end ${toggle?'rotate-180':''}`}/></button>
             </div>
             <div>
-                <ul className={`p-1 ml-2 ${toggle?'block':'hidden'} ${toggle?'animate-accordian-menu-open':'animate-accordian-menu-close'}`}> 
+                <ul className={`p-1 ml-2 ${toggle?'block':'hidden'} ${toggle?'animate-accordian-menu-open':'animate-accordian-menu-close'} border-l`}> 
                     {/* <li className="p-0">1</li>
                     <li className="p-0">2</li>
                     <li className="p-0">2</li>
@@ -197,8 +198,8 @@ function AccordionMenu ({children}: Props) {
                             return (
                                 <li key={idx}>
                                     <Link href={`/post/${children.name}/${title}`}>
-                                        <a className='side-menu-item'>
-                                            <span className="relative">{title}</span>
+                                        <a className='side-menu-item hover:bg-white hover:font-bold'>
+                                            <span className="relative flex"><BsDot className='self-center'/>{title}</span>
                                         </a>
                                     </Link>
                                 </li>        
