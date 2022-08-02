@@ -19,8 +19,27 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { MdKeyboardArrowRight, MdArrowForwardIos } from "react-icons/md";
+import { RiArrowUpSLine } from "react-icons/ri";
 
-const Header = ()=>{
+
+type Props = {
+    children?: PostItem
+}
+
+type PostItem = {
+    name?: string
+    postCnt?: number
+    posts?: []
+}
+
+type PostListProps = {
+    postList?:PostItem []
+}
+
+const Header = ({postList}:PostListProps)=>{
+
+    console.log(`rendering`,postList)
     const [sideView, setSideView] = useState(false);
 
     const toggleDrawer = () => {
@@ -37,19 +56,24 @@ const Header = ()=>{
         }
     };
 
-    const [expanded, setExpanded] = useState([false,false,false,false]);
-    // const handleChange = (idx:number)=>{
-    //     let deepCopy_expanded = {...expanded}
-    //     deepCopy_expanded[idx] = !expanded[idx]
-    //     setExpanded(deepCopy_expanded)
-    // }
-    const handleChange = (idx: number) => (event: React.SyntheticEvent, isExpanded: boolean) => {
-        // setExpanded(isExpanded ? panel : false);
-            let deepCopy_expanded = {...expanded}
-            deepCopy_expanded[idx] = !expanded[idx]
-            setExpanded(deepCopy_expanded)
-        };
+    // const [expanded, setExpanded] = useState([false,false,false,false]);
+    // const handleChange = (idx: number) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+    //     // setExpanded(isExpanded ? panel : false);
+    //         let deepCopy_expanded = {...expanded}
+    //         deepCopy_expanded[idx] = !expanded[idx]
+    //         setExpanded(deepCopy_expanded)
+    //     };
         
+    const rendering = () => {
+        const rs = []
+        
+        console.log(`rendering`,postList)
+        console.log(`rendering:${JSON.stringify(postList)}`)
+        for(let i=0; i<postList.length; i++){
+            rs.push(<li key={i}><AccordionMenu>{postList[i]}</AccordionMenu></li>);
+        }
+        return rs
+    }
 
     return (
         <header className="sticky w-full top-0 z-50 grid grid-cols-3 bg-white mx-auto h-16 lg:h-20 shadow-lg">            
@@ -68,13 +92,14 @@ const Header = ()=>{
             </Link>
             
             <div className={`fixed top-0 z-[1200] w-full h-[1000px] bg-gray-500 opacity-40 transition ${sideView?'visible':'invisible'}`} onClick={()=>setSideView(!sideView)}></div>
-            <nav className={`fixed top-0 z-[1300] w-[300px] h-full bg-yellow-200 opacity-100 ${sideView?'left-0':'left-[-300px]'} duration-500`}>
+            <nav className={`fixed top-0 z-[1300] w-[300px] h-full bg-white opacity-100 ${sideView?'left-0':'left-[-300px]'} duration-500`}>
                 <div className="h-[50px] items-center mx-auto justify-center">
                     <span className="font-bold text-xl w-auto">JustinTory</span>
                 </div>
                 <nav className='p-2 overflow-y-auto h-[90%]'>
                     <ul>
-                        <li>
+                    {rendering()}
+                        {/* <li>
                             <Accordion expanded={expanded[0]} onChange={handleChange(0)}>
                                 <AccordionSummary
                                     expandIcon={<ExpandMoreIcon />}
@@ -98,52 +123,6 @@ const Header = ()=>{
                             </Accordion>
                         </li>
                         <li>
-                            <Accordion expanded={expanded[1]} onChange={handleChange(1)}>
-                                <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon />}
-                                    aria-controls="panel1bh-content"
-                                    id="panel2bh-header"
-                                    >
-                                    <Typography>
-                                        General settings
-                                    </Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                    <ul>
-                                        <li>test</li>
-                                        <li>test</li>
-                                        <li>test</li>
-                                        <li>test</li>
-                                        <li>test</li>
-
-                                    </ul>
-                                </AccordionDetails>
-                            </Accordion>
-                        </li>
-                        <li>
-                            <Accordion expanded={expanded[2]} onChange={handleChange(2)}>
-                                <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon />}
-                                    aria-controls="panel1bh-content"
-                                    id="panel3bh-header"
-                                    >
-                                    <Typography>
-                                        General settings
-                                    </Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                    <ul>
-                                        <li>test</li>
-                                        <li>test</li>
-                                        <li>test</li>
-                                        <li>test</li>
-                                        <li>test</li>
-
-                                    </ul>
-                                </AccordionDetails>
-                            </Accordion>
-                        </li>
-                        <li>
                             <Accordion expanded={expanded[3]} onChange={handleChange(3)}>
                                 <AccordionSummary
                                     expandIcon={<ExpandMoreIcon />}
@@ -165,30 +144,16 @@ const Header = ()=>{
                                     </ul>
                                 </AccordionDetails>
                             </Accordion>
+                        </li> */}
+                        {/* <li>
+                            <AccordionMenu></AccordionMenu>
                         </li>
                         <li>
-                            <Accordion expanded={expanded[3]} onChange={handleChange(3)}>
-                                <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon />}
-                                    aria-controls="panel1bh-content"
-                                    id="panel3bh-header"
-                                    >
-                                    <Typography>
-                                        General settings
-                                    </Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                    <ul>
-                                        <li>test</li>
-                                        <li>test</li>
-                                        <li>test</li>
-                                        <li>test</li>
-                                        <li>test</li>
-
-                                    </ul>
-                                </AccordionDetails>
-                            </Accordion>
+                            <AccordionMenu></AccordionMenu>
                         </li>
+                        <li>
+                            <AccordionMenu></AccordionMenu>
+                        </li> */}
                     </ul>
                 </nav>
                 
@@ -203,3 +168,46 @@ const Header = ()=>{
 
 
 export default Header
+
+function AccordionMenu ({children}: Props) {
+    let summaryTitle = `${children.name}(${children.postCnt})`
+    const [toggle, setToggle] = useState(false);
+    const clickedToggle = () => {
+        console.log(toggle)
+        setToggle((prev) => !prev);
+    };
+
+    //${toggle?'block':'hidden'}
+    return (
+        <div className="bg-white">
+            <div className="flex place-content-between h-10 pl-3 hover:bg-blue-400">
+                <a href='#' className="self-center text-black ">{summaryTitle}</a>
+                <button className="w-5" onClick={clickedToggle}><RiArrowUpSLine className={`justify-self-end ${toggle?'rotate-180':''}`}/></button>
+            </div>
+            <div>
+                <ul className={`p-1 ml-2 ${toggle?'block':'hidden'} ${toggle?'animate-accordian-menu-open':'animate-accordian-menu-close'}`}> 
+                    {/* <li className="p-0">1</li>
+                    <li className="p-0">2</li>
+                    <li className="p-0">2</li>
+                    <li className="p-0">2</li>
+                    <li className="p-0">2</li> */}
+                    {
+                        children.posts.map((item :String, idx)=>{
+                            let title = item.substring(0,item.length-4)
+                            return (
+                                <li key={idx}>
+                                    <Link href={`/post/${children.name}/${title}`}>
+                                        <a className='side-menu-item'>
+                                            <span className="relative">{title}</span>
+                                        </a>
+                                    </Link>
+                                </li>        
+                            )
+                        })
+                    }
+                </ul>
+            </div>
+
+        </div>
+    )
+}

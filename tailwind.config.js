@@ -16,6 +16,20 @@ module.exports = {
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
+      animation: {
+        'accordian-menu-open': 'accordian-menu-open 0.5s ease',
+        'accordian-menu-close': 'accordian-menu-close 0.5s ease',
+      },
+      keyframes: {
+        'accordian-menu-open': {
+          '0%' : {'height': '0%', 'opacity': '0'},
+          '100%': {height: '100%', opacity: '1'}
+        },
+        'accordian-menu-close': {
+          '0%' : {'height': '100%', 'opacity': '1'},
+          '100%': {height: '0%', opacity: '0'}
+        },
+      },
       screens: {
         'mobile' : '375px'
         

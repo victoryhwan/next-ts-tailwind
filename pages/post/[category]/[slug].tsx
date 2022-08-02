@@ -41,7 +41,7 @@ type PostPageProps = {
   // console.log(posts)
   return (
     <div>
-      <Header/>
+      <Header postList={postDirArr}/>
       <div className="container mx-auto max-w-7xl">
             <div className="lg:flex">
                 <Sidebar postList={postDirArr}/>

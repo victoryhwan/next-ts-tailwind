@@ -13,7 +13,7 @@ type Props = {
 export default function Home({postDirArr}:Props) {
   return (
     <div className="">
-      <Header/>
+      <Header postList={postDirArr}/>
       {/* <Sidebar postList={postDirArr}/> */}
       {/* <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-yellow-500"> */}
         <div className="container mx-auto max-w-7xl">
