@@ -92,7 +92,7 @@ const Header = ({postList}:PostListProps)=>{
                 </a>
             </Link>
             
-            <div className={`fixed top-0 z-[1200] lg:hidden w-full h-[1000px] bg-gray-500 opacity-40 transition ${sideView?'visible':'invisible'}`} onClick={()=>setSideView(!sideView)}></div>
+            <div className={`fixed top-0 z-[1200] lg:hidden w-full h-[100vh] bg-gray-500 opacity-40 transition ${sideView?'visible':'invisible'}`} onClick={()=>setSideView(!sideView)}></div>
             <nav className={`fixed top-0 z-[1300] lg:hidden w-[300px] h-full bg-white opacity-100 ${sideView?'left-0':'left-[-300px]'} duration-500`}>
                 <div className="h-[50px] items-center mx-auto justify-center">
                     <span className="font-bold text-xl w-auto">JustinTory</span>
