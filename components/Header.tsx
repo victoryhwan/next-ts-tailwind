@@ -92,69 +92,14 @@ const Header = ({postList}:PostListProps)=>{
                 </a>
             </Link>
             
-            <div className={`fixed top-0 z-[1200] w-full h-[1000px] bg-gray-500 opacity-40 transition ${sideView?'visible':'invisible'}`} onClick={()=>setSideView(!sideView)}></div>
-            <nav className={`fixed top-0 z-[1300] w-[300px] h-full bg-white opacity-100 ${sideView?'left-0':'left-[-300px]'} duration-500`}>
+            <div className={`fixed top-0 z-[1200] lg:hidden w-full h-[1000px] bg-gray-500 opacity-40 transition ${sideView?'visible':'invisible'}`} onClick={()=>setSideView(!sideView)}></div>
+            <nav className={`fixed top-0 z-[1300] lg:hidden w-[300px] h-full bg-white opacity-100 ${sideView?'left-0':'left-[-300px]'} duration-500`}>
                 <div className="h-[50px] items-center mx-auto justify-center">
                     <span className="font-bold text-xl w-auto">JustinTory</span>
                 </div>
                 <nav className='p-2 overflow-y-auto h-[90%]'>
                     <ul>
                     {rendering()}
-                        {/* <li>
-                            <Accordion expanded={expanded[0]} onChange={handleChange(0)}>
-                                <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon />}
-                                    // aria-controls="panel1bh-content"
-                                    // id="panel1bh-header"
-                                    >
-                                    <Typography>
-                                        General settings
-                                    </Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                    <ul>
-                                        <li>test</li>
-                                        <li>test</li>
-                                        <li>test</li>
-                                        <li>test</li>
-                                        <li>test</li>
-
-                                    </ul>
-                                </AccordionDetails>
-                            </Accordion>
-                        </li>
-                        <li>
-                            <Accordion expanded={expanded[3]} onChange={handleChange(3)}>
-                                <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon />}
-                                    aria-controls="panel1bh-content"
-                                    id="panel3bh-header"
-                                    >
-                                    <Typography>
-                                        General settings
-                                    </Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                    <ul>
-                                        <li>test</li>
-                                        <li>test</li>
-                                        <li>test</li>
-                                        <li>test</li>
-                                        <li>test</li>
-
-                                    </ul>
-                                </AccordionDetails>
-                            </Accordion>
-                        </li> */}
-                        {/* <li>
-                            <AccordionMenu></AccordionMenu>
-                        </li>
-                        <li>
-                            <AccordionMenu></AccordionMenu>
-                        </li>
-                        <li>
-                            <AccordionMenu></AccordionMenu>
-                        </li> */}
                     </ul>
                 </nav>
                 
@@ -183,7 +128,7 @@ function AccordionMenu ({children}: Props) {
         <div className="bg-white">
             <div className="flex place-content-between h-10 pl-3 hover:rounded-lg hover:font-bold" onClick={clickedToggle}>
                 <div className="self-center text-black ">{summaryTitle}</div>
-                <button className="w-5"><RiArrowUpSLine className={`justify-self-end ${toggle?'rotate-180':''}`}/></button>
+                <button className="w-5"><RiArrowUpSLine className={`justify-self-end ${toggle?'rotate-180 duration-500':'duration-500'}`}/></button>
             </div>
             <div>
                 <ul className={`p-1 ml-2 ${toggle?'block':'hidden'} ${toggle?'animate-accordian-menu-open':'animate-accordian-menu-close'} border-l`}> 

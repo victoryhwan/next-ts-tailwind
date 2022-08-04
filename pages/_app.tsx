@@ -11,12 +11,6 @@ _app.tsx 파일에는 global css를 적용할 수 있다.
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    // <ThemeProvider attribute="class" enableSystem={false} defaultTheme="dark">
-      
-    //   <Layout>
-    //     <Component {...pageProps} />
-    //   </Layout>
-    // </ThemeProvider>
     <>
       <Head>
           <meta charSet="utf-8" />

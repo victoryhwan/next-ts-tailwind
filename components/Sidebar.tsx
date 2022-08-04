@@ -124,7 +124,7 @@ function AccordionMenu ({children}: Props) {
         <div className="">
             <div className="flex place-content-between h-10 pl-3 hover:rounded-lg hover:font-bold" onClick={clickedToggle}>
                 <div className="self-center text-black ">{summaryTitle}</div>
-                <button className="w-5"><RiArrowUpSLine className={`justify-self-end ${toggle?'rotate-180':''}`}/></button>
+                <button className="w-5"><RiArrowUpSLine className={`justify-self-end ${toggle?'rotate-180 duration-500':'duration-500'}`}/></button>
             </div>
             <div>
                 <ul className={`p-1 ml-2 ${toggle?'block':'hidden'} ${toggle?'animate-accordian-menu-open':'animate-accordian-menu-close'} border-l`}> 
