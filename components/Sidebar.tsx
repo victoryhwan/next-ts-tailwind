@@ -58,7 +58,7 @@ const Sidebar = ({postList}:PostListProps)=>{
     return (
         //hidden lg:block fixed z-20 inset-0 top-[3.8125rem] left-[max(0px,calc(50%-45rem))] right-auto w-[19.5rem] pb-10 px-8 overflow-y-auto
         //absolute z-40 inset-0 flex-none h-full bg-black bg-opacity-25 w-full lg:bg-gray-100 lg:static lg:h-auto lg:overflow-y-visible lg:pt-0 lg:w-60 xl:w-72 lg:block hidden
-        //hidden lg:block fixed z-20 inset-0 top-[3.8125rem] left-[max(0px,calc(50%-45rem))] right-auto w-[19.5rem] pb-10 px-8 overflow-y-auto
+        //hidden lg:block fixed z-20 inset-0 top-[3.8125rem] left-[max(0px,calc(50%-45rem))] right-auto w-[19.5rem] pb-10 px-8 overflow-y-auto  
         <>            
             <div id="sidebar" className="sticky top-[30px] z-40 flex-none bg-black bg-opacity-25 w-full lg:bg-white lg:pt-0 lg:w-60 xl:w-72 lg:block hidden h-[100vh] border-r">
                 
