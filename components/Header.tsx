@@ -1,31 +1,16 @@
 import { MenuIcon } from '@heroicons/react/solid'
 import Link from 'next/link';
-import styles from "./Header.module.css";
-import React, { useState } from 'react';
-import Box from '@mui/material/Box';
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-// import InboxIcon from '@mui/icons-material/MoveToInbox';
-// import MailIcon from '@mui/icons-material/Mail';
+import { useRouter } from 'next/router';
 
-import Accordion from '@mui/material/Accordion';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { MdKeyboardArrowRight, MdArrowForwardIos } from "react-icons/md";
+import React, { useState } from 'react';
 import { RiArrowUpSLine } from "react-icons/ri";
 import { BsDot } from "react-icons/bs";
 
 
 type Props = {
-    children?: PostItem
+    children?: PostItem,
+    sideView: Boolean,
+    setSideView: any
 }
 
 type PostItem = {
@@ -42,28 +27,6 @@ const Header = ({postList}:PostListProps)=>{
 
     console.log(`rendering`,postList)
     const [sideView, setSideView] = useState(false);
-
-    const toggleDrawer = () => {
-        
-        (event: React.KeyboardEvent | React.MouseEvent) => {
-            console.log(`click`)
-            if (
-                event.type === 'keydown' &&
-                ((event as React.KeyboardEvent).key === 'Tab' ||
-                (event as React.KeyboardEvent).key === 'Shift')
-            ) {
-                return;
-            }
-        }
-    };
-
-    // const [expanded, setExpanded] = useState([false,false,false,false]);
-    // const handleChange = (idx: number) => (event: React.SyntheticEvent, isExpanded: boolean) => {
-    //     // setExpanded(isExpanded ? panel : false);
-    //         let deepCopy_expanded = {...expanded}
-    //         deepCopy_expanded[idx] = !expanded[idx]
-    //         setExpanded(deepCopy_expanded)
-    //     };
         
     const rendering = () => {
         const rs = []
@@ -71,7 +34,11 @@ const Header = ({postList}:PostListProps)=>{
         console.log(`rendering`,postList)
         console.log(`rendering:${JSON.stringify(postList)}`)
         for(let i=0; i<postList.length; i++){
-            rs.push(<li key={i}><AccordionMenu>{postList[i]}</AccordionMenu></li>);
+            // rs.push(<li key={i}><AccordionMenu>{postList[i]}</AccordionMenu></li>);
+            let propsObj = {
+                post : postList[i]
+            }
+            rs.push(<li key={i}><AccordionMenu children={postList[i]} sideView={sideView} setSideView={setSideView}/></li>);
         }
         return rs
     }
@@ -92,10 +59,10 @@ const Header = ({postList}:PostListProps)=>{
                 </a>
             </Link>
             
-            <div className={`fixed top-0 z-[1200] lg:hidden w-full h-[100vh] bg-gray-500 opacity-40 transition ${sideView?'visible':'invisible'}`} onClick={()=>setSideView(!sideView)}></div>
+            <div className={`fixed top-0 z-[1200] lg:hidden w-full h-[100vh] bg-gray-500 opacity-40 transition blur-sm ${sideView?'visible':'invisible'}`} onClick={()=>setSideView(!sideView)}></div>
             <nav className={`fixed top-0 z-[1300] lg:hidden w-[300px] h-full bg-white opacity-100 ${sideView?'left-0':'left-[-300px]'} duration-500`}>
-                <div className="h-[50px] items-center mx-auto justify-center">
-                    <span className="font-bold text-xl w-auto">JustinTory</span>
+                <div className="h-[50px]">
+                    {/* <span className="font-bold text-xl w-auto inline-block align-middle">JustinTory</span> */}
                 </div>
                 <nav className='p-2 overflow-y-auto h-[90%]'>
                     <ul>
@@ -115,7 +82,8 @@ const Header = ({postList}:PostListProps)=>{
 
 export default Header
 
-function AccordionMenu ({children}: Props) {
+function AccordionMenu ({children, sideView, setSideView}: Props) {
+    const router = useRouter()
     let summaryTitle = `${children.name}(${children.postCnt})`
     const [toggle, setToggle] = useState(false);
     const clickedToggle = () => {
@@ -132,21 +100,17 @@ function AccordionMenu ({children}: Props) {
             </div>
             <div>
                 <ul className={`p-1 ml-2 ${toggle?'block':'hidden'} ${toggle?'animate-accordian-menu-open':'animate-accordian-menu-close'} border-l`}> 
-                    {/* <li className="p-0">1</li>
-                    <li className="p-0">2</li>
-                    <li className="p-0">2</li>
-                    <li className="p-0">2</li>
-                    <li className="p-0">2</li> */}
                     {
                         children.posts.map((item :String, idx)=>{
                             let title = item.substring(0,item.length-4)
                             return (
                                 <li key={idx}>
-                                    <Link href={`/post/${children.name}/${title}`}>
-                                        <a className='side-menu-item hover:bg-white hover:font-bold'>
-                                            <span className="relative flex"><BsDot className='self-center'/>{title}</span>
-                                        </a>
-                                    </Link>
+                                    <button className='side-menu-item hover:bg-white hover:font-bold' onClick={()=>{
+                                        setSideView(!sideView)
+                                        router.push(`/post/${children.name}/${title}`)
+                                    }}>
+                                        <span className="relative flex"><BsDot className='self-center'/>{title}</span>
+                                    </button>
                                 </li>        
                             )
                         })
