@@ -1,0 +1,50 @@
+# tailwindcss
+
+# 적용하는 법
+
+공식홈페이지에도 설명이 잘 나와 있다. https://tailwindcss.com/docs/installation
+
+여기서 한번더 복습! 
+
+먼저, npm과 npx로 다운로드 및 설치
+
+```jsx:terminal
+npm install -D tailwindcss
+npx tailwindcss init
+```
+
+그러면,
+
+`tailwind.config.js` 파일이 생성된 것을 볼 수 있다.
+
+tailwindcss를 사용하다보면 이 `tailwind.config.js` 파일을 많이 사용하게 될 것이다.
+
+기본제공 기능뿐만아니라 내 입맛대로 수정할 수 있다.
+
+
+
+```jsx:tailwind.config.js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./src/**/*.{html,js}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+`글로벌.css`파일에 다음과 같은 코드를 추가
+
+```jsx
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+VSCode Extension `Tailwind CSS IntelliSense` 설치
+
+사실상 필수사항임. 자동완성 기능으로 매우 편리하게 tailwindcss를 이용할 수 있음.
+
+자세한 사항은 공식 홈페이지에서
+[Tailwindcss](https://tailwindcss.com/)

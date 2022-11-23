@@ -1,0 +1,88 @@
+# react-router-dom
+
+*v6 버전을 기준으로 작성 됨.*
+
+<aside>
+💡 react-router-dom는 새로운 페이지를 로드하지 않고 라우터에 등록된 url에 따라 해당 컴포넌트를 렌더링해준다. SPA(Single Page Application)에서 필요한 라이브러리이다.
+
+</aside>
+
+# 설치
+
+```jsx:terminal
+npm install react-router-dom
+//or yarn add react-router-dom
+```
+
+# 사용 방법
+
+## 등록
+
+`BrowserRouter` 와 `Routes` `Route` 을 이용하여 `path`와 렌더링을 할 `element`를 등록한다.
+
+홈페이지에 다양한 정보가 많음. [https://reactrouter.com](https://reactrouter.com/en/main)
+
+## 이동
+
+path이동 방법은 `react-router-dom`의 `Link`를 이용한다.
+
+`<Link to="/">index</Link>`
+
+# 사용 예시
+
+```tsx:App.tsx
+import React from 'react';
+// import logo from './logo.svg';
+import './App.css';
+import {BrowserRouter, Route, Routes} from "react-router-dom"
+import About from './pages/About';
+import Header from './components/Header';
+function App() {
+  return (
+    <>
+      <BrowserRouter>
+        <Header/>
+        <Routes>
+          <Route path="/" element={<div>index</div>}></Route>
+          <Route path="hwan" element={<div>hwan</div>}></Route>
+          <Route path="about">
+            <Route index element={<About/>}/>
+            <Route path=':number' element={<About/>}/>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
+}
+
+export default App;
+```
+
+```tsx:Header.tsx
+import { Link } from "react-router-dom"
+
+function Header() {
+    return (
+        <header className="sticky top-0 z-50 bg-yellow-100 laptop:z-50 w-full max-w-8xl mx-auto flex-none flex h-16 laptop:h-20 shadow-lg justify-center">
+            <div className="w-[1280px] flex justify-between">
+                <div className="w-[150px] m-5">
+                    <span className="font-bold text-xl w-auto text-black"><Link to="/">Header</Link></span>
+                </div>
+                <div className="flex justify-between items-center">
+                    <nav className='bg-blue-200 flex'>
+                        <ul className='inline-flex'>
+                            <li className='m-3 list-none text-black'>
+                                <Link to="/">index</Link>
+                            </li>
+                            <li className='m-3 list-none text-black'>
+                                <Link to="/about">about</Link>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+    )
+}
+export default Header
+```
