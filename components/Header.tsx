@@ -25,14 +25,14 @@ type PostListProps = {
 
 const Header = ({postList}:PostListProps)=>{
 
-    console.log(`rendering`,postList)
+    // console.log(`rendering`,postList)
     const [sideView, setSideView] = useState(false);
         
     const rendering = () => {
         const rs = []
         
-        console.log(`rendering`,postList)
-        console.log(`rendering:${JSON.stringify(postList)}`)
+        // console.log(`rendering`,postList)
+        // console.log(`rendering:${JSON.stringify(postList)}`)
         for(let i=0; i<postList.length; i++){
             // rs.push(<li key={i}><AccordionMenu>{postList[i]}</AccordionMenu></li>);
             let propsObj = {
@@ -55,7 +55,7 @@ const Header = ({postList}:PostListProps)=>{
             </div>
             <Link href={`/`}>
                 <a className="w-70 items-center mx-auto flex">
-                    <span className="font-bold text-xl w-auto">JustinTory</span>
+                    <span className="font-bold text-xl w-auto bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500 animate-text-gradient">JustinTory</span>
                 </a>
             </Link>
             
@@ -85,7 +85,7 @@ export default Header
 function AccordionMenu ({children, sideView, setSideView}: Props) {
     const router = useRouter()
     let summaryTitle = `${children.name}(${children.postCnt})`
-    const [toggle, setToggle] = useState(false);
+    const [toggle, setToggle] = useState(true);
     const clickedToggle = () => {
         console.log(toggle)
         setToggle((prev) => !prev);
@@ -105,7 +105,7 @@ function AccordionMenu ({children, sideView, setSideView}: Props) {
                             let title = item.substring(0,item.length-4)
                             return (
                                 <li key={idx}>
-                                    <button className='side-menu-item hover:bg-white hover:font-bold' onClick={()=>{
+                                    <button className='side-menu-item hover:bg-white hover:font-bold transition duration-150 ease-in-out' onClick={()=>{
                                         setSideView(!sideView)
                                         router.push(`/post/${children.name}/${title}`)
                                     }}>

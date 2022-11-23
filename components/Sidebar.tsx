@@ -112,7 +112,7 @@ function SideBar_li ({children}: Props){
 }
 
 function AccordionMenu ({children}: Props) {
-    console.log('children',children)
+    // console.log('children',children)
     let summaryTitle = `${children.name}(${children.postCnt})`
     const [toggle, setToggle] = useState(false);
     const clickedToggle = () => {

@@ -19,6 +19,7 @@ module.exports = {
       animation: {
         'accordian-menu-open': 'accordian-menu-open 0.5s ease',
         'accordian-menu-close': 'accordian-menu-close 0.5s ease',
+        'text-gradient': 'text-gradient 3s ease infinite'
       },
       keyframes: {
         'accordian-menu-open': {
@@ -29,6 +30,29 @@ module.exports = {
           '0%' : {'height': '100%', 'opacity': '1'},
           '100%': {height: '0%', opacity: '0'}
         },
+        'text-gradient':{
+        //   '0% 100': {
+        //     'background-size':'100% 100%',
+        //      'background-position': 'left center'
+        //   },
+        //  '50%': {
+        //   'background-size':'100% 100%',
+        //    'background-position': 'right center'
+        //   },
+          '0%, 100%': {
+            'background-size':'200% 200%',
+            'background-position': 'left center'
+          },
+          '50%': {
+              'background-size':'200% 200%',
+              'background-position': 'right center'
+          }
+        // '100%': {
+        //  'background-size':'100% 100%',
+        //   'background-position': 'right center'
+        //   }
+          // '200%' : {'background-position' : 'center'}
+        }
       },
       screens: {
         'mobile' : '375px'
