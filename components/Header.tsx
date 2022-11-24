@@ -2,7 +2,7 @@ import { MenuIcon } from '@heroicons/react/solid'
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { RiArrowUpSLine } from "react-icons/ri";
 import { BsDot } from "react-icons/bs";
 
@@ -28,6 +28,14 @@ const Header = ({postList}:PostListProps)=>{
     // console.log(`rendering`,postList)
     const [sideView, setSideView] = useState(false);
         
+    useEffect(() => {
+        if(sideView){
+            document.body.style.overflow = "hidden";
+        }else{
+            document.body.style.overflow = "unset";
+        }
+      }, [sideView]);
+
     const rendering = () => {
         const rs = []
         
