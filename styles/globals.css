@@ -37,7 +37,7 @@
   @apply m-0;
 }
 
-.prose p code {
+.prose p code, .prose li code {
   @apply bg-gradient-to-r from-green-400 to-blue-300 border-0 animate-text-gradient
 }
 .prose h1 {
