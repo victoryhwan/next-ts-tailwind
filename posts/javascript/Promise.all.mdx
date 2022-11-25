@@ -1,0 +1,31 @@
+
+# Promise.All
+
+사건이 생겼다.
+
+api를 임의 배열 수 만큼 호출하고 모두 콜백이 올때까지 waiting을 해야하는 로직을 짜야하는 사건이 말이다.
+
+
+```jsx:javascript
+let result = await Promise.all(
+    임의배열.map(async (item, idx)=>{
+        let rs = await API명(item)
+        return {
+            rs : rs,
+            idx : idx
+        }
+    })
+)
+
+console.log(result)
+
+```
+
+결과
+```
+    [
+        {idx : 0, rs:  {api return data}},
+        {idx : 1, rs:  {api return data}}
+        ...
+    ]
+```
