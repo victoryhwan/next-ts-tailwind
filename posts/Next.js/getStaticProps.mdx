@@ -1,0 +1,94 @@
+
+# Next.js로 SSR 페이지 만들기 getStaticProps
+
+*이 포스트는 v13 전 버전기준으로 작성. Nextjs 13버전 부터는 사용하지 않는다.*
+
+## getStaticProps란?
+공홈에 따르면,
+- pages 폴더 하위에서 사용된다.
+- 소스코드는 페이지파일에 위치하고 있지만, 서버쪽에서 실행되는 펑션이다.
+- 일반적으로 생각하는 SEO를 적용할때 사용한다.
+- 빌드시에 미리 랜더링을 하여 html 및 json으로 가지고 있다가, 해당 페이지 요청이 들어오면 리턴해준다.
+- `npm run dev` 로 개발할 경우에는 요청시마다 호출되어 실행된다.
+    
+    (product모드에서는 이미 생성된 데이터를 사용하기 때문에 모든 요청에 대해 호출하지 않는다.)
+    
+- 일정 시간 단위로 getStaticProps 실행시키기
+
+## 사용예시
+블로그를 예로들어 보겠습니다.
+블로그 마크다운 파일은 정적인 파일이기 때문에 SSR로 사용하기에 안성맞춤이죠.
+
+빌드시에 서버에 마크다운 파일 리스트를 모두 읽어 두고 미리 렌더링을 해둔다는 겁니다.
+
+```jsx:/post/[category]/[slug].tsx
+export const getStaticProps: GetStaticProps = async (params) => {
+
+  let fileName = params.params.slug.toString()+".mdx"
+
+  const postContent = fs.readFileSync(path.join(`posts/${params.params.category}`, fileName)) //posts/react 디렉토리에 있는 파일을 읽음.
+  const { content, data } = matter(postContent);
+  const mdxSource = await serialize(content, {
+    // Optionally pass remark/rehype plugins
+    mdxOptions: {
+      remarkPlugins: [require('remark-code-titles')],
+      rehypePlugins: [mdxPrism],
+    },
+    scope: data,
+  });
+
+  let postDirArr = getAllPostDir()
+  return {
+    props: {
+      source: mdxSource,
+      postDirArr: postDirArr //사이드메뉴 리스트 정보
+    }
+  }
+}
+```
+
+
+`npm run build` 를 통해 빌드를 해보면
+
+제가 작성한 파일 /post/[category]/[slug].tsx 1개에서
+
+마크다운파일 수 만큼의 페이지가 생성됐습니다. (Next.js의 getStaticPaths 기술이 포함됨.)
+
+```jsx:terminal
+> npm run build 
+
+...생략...
+
+Page                                         Size     First Load JS
+┌ ● /                                        2.36 kB        77.3 kB
+├   /_app                                    0 B            71.8 kB
+├ ○ /404                                     1.46 kB        73.3 kB
+├ λ /api/hello                               0 B            71.8 kB
+└ ● /post/[category]/[slug] (5401 ms)        7.36 kB        82.3 kB
+    ├ /post/React/react-router-dom (944 ms)
+    ├ /post/React/example-post (883 ms)
+    ├ /post/React/테스트 (881 ms)
+    ├ /post/Next.js/getStaticProps (781 ms)
+    ├ /post/Vue.js/테스트 (760 ms)
+    ├ /post/Style/tailwindcss (758 ms)
+    └ /post/Vue.js/hello-world (394 ms)
++ First Load JS shared by all                71.8 kB
+  ├ chunks/framework-5f4595e5518b5600.js     42 kB
+  ├ chunks/main-1a59f16f14cc63cc.js          26 kB
+  ├ chunks/pages/_app-e944f8c4857f9fd0.js    2.32 kB
+  ├ chunks/webpack-81e336fc0eae4b4c.js       1.44 kB
+  └ css/95020179229c2b10.css                 5.55 kB
+  ```
+
+  위와 같은 예제 뿐만아니라
+
+네이버의 첫 메인화면 처럼 모든 사용자에게 공통의 데이터를 제공하는 웹페이지에도 활용하면 좋겠죠.
+
+심플하게 생각해보면
+`getStaticProps` 는 서버에서 미리 데이터를 가지고 있는다. 
+데이터를 가지고 미리 렌더링을 해놓고 있거나.
+미리 데이터를 가지고 있거나.
+
+Next.js는 SSR 구현이 너무 쉽구나...
+
+내 기억이 사라지기 전에 작성하여 저장
