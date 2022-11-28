@@ -68,7 +68,7 @@ function Section () {
 
   return (
     <section className="flex">
-      <div className="w-full relative text-black overflow-hidden rounded-2xl flex shadow-lg border border-gray-200 hover:border-red-200 hover:bg-red-200">
+      <div className="w-full relative text-black overflow-hidden rounded-2xl flex hover:shadow-lg border border-gray-200">
         <div className="w-full flex md:flex-col">
           <div className="sm:max-w-sm sm:flex-none md:w-auto md:flex-auto flex flex-col items-start relative z-10 p-6 xl:p-8">
             <h2 className="text-xl font-semibold mb-2 text-shadow">Try it in the browser</h2>
