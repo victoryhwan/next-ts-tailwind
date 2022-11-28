@@ -1,0 +1,35 @@
+# Next.js Proxy 설정
+
+Next.js에서 여러가지 활용 목적으로 proxy를 지원하고 있다.
+- vercel에 배포된 url을 기준으로 api를 호출할때.(vercel 호스팅 이용할 경우)
+- 외부 url로 변경(CORS 이슈로 해결이 필요할 경우.)
+- 다른 응용이 필요할 경우 (`Rewrite parameters`
+, `Path Matching`, `Wildcard Path Matching`, `Regex Path Matching
+` 등등)
+
+[Next.js Proxy설정 공식](https://nextjs.org/docs/api-reference/next.config.js/rewrites)
+
+
+`next.config.js` 파일에서 설정하면 된다.
+
+`rewrites`를 아래와 같이 작성한다. 
+
+
+```jsx:next.config.js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  experimental: {
+    appDir: true,
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/:path*', //프론트 소스에서 요걸로 요청 
+        destination: 'www.example.com/:path*', //서버에서 요기로 변경해서 요청 
+      },
+    ]
+  },
+}
+
+module.exports = nextConfig
+```
