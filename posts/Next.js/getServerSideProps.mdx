@@ -1,1 +1,53 @@
-# getServerSideProps
+# Next.js로 SSR 페이지 만들기 getServerSideProps
+
+_이 포스트는 v13 전 버전기준으로 작성. Nextjs 13버전 부터는 사용하지 않는다._
+
+## getServerSideProps란?
+
+- pages 폴더 하위에서 사용된다.
+- 소스코드는 페이지파일에 위치하고 있지만, 서버쪽에서 실행되는 펑션이다.
+- 페이지 요청시 `getServerSideProps`가 서버에서 실행되고 json을 반환하여 렌더링에 사용됩니다.
+
+## 사용 예
+
+- 페이지가 렌더링 되기전에 서버쪽에서 해야하는 일이 있는경우.
+  1. api를 요청하여 결과값을 가지고 렌더링을 해야하는 경우.
+  2. getServerSideProps는 페이지 렌더링 속도를 저하 시킬 수 있으므로 캐시기능을 사용하면 좋다.
+  - (페이지를 요청할 때마다 `getServerSideProps`를 실행하기 때문)
+
+## 코드 예제
+
+아래는 getServerSideProps function 에 `setTimeout`함수를 이용해서 2초 딜레이를 시켰다.
+이렇게 되면 이 페이지는 화면이 2초 뒤에 렌더링을 시작하게 되며, 사용자 입장에서는 느린 페이지가 된다.
+
+```
+export default function Playground(props: any) {
+  return (
+    <>
+      <h1>여기는 Playground</h1>
+    </>
+  );
+}
+
+export async function getServerSideProps() {
+  await delay(2000); //2초간 딜레이
+  return {
+    props: {}, // will be passed to the page component as props
+  };
+}
+
+let delay = (time) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      return resolve(true);
+    }, time);
+  });
+};
+
+```
+
+### 느낀점
+
+`getServerSideProps`는 꼭 필요한 경우에만 사용하고,
+`getServerSideProps`에서 api를 사용한다면 `SWR` 또는 `react-query`의 cache 기능을 활용하여
+속도 이슈를 해결해야 할 것이다.
