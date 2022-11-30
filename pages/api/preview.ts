@@ -1,0 +1,6 @@
+export default function handler(req, res) {
+  // ...
+  //console.log(`preview.ts :${JSON.stringify(req.query.slug)}`);
+  res.setPreviewData({});
+  // ...
+}

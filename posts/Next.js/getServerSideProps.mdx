@@ -20,7 +20,7 @@ _이 포스트는 v13 전 버전기준으로 작성. Nextjs 13버전 부터는 �
 아래는 getServerSideProps function 에 `setTimeout`함수를 이용해서 2초 딜레이를 시켰다.
 이렇게 되면 이 페이지는 화면이 2초 뒤에 렌더링을 시작하게 되며, 사용자 입장에서는 느린 페이지가 된다.
 
-```
+```jsx:pages/playground.tsx
 export default function Playground(props: any) {
   return (
     <>
