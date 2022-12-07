@@ -13,16 +13,6 @@ type Props = {
     children?: PostItem
 }
 
-// type SideProps = {
-//     title: string;
-//     gubun: string;
-//     path: string;
-// }
-
-// type SideProps2 = {
-//     children?: PostItem
-// }
-
 type PostItem = {
     name?: string
     postCnt?: number
@@ -34,16 +24,6 @@ type PostListProps = {
 }
 
 const Sidebar = ({postList}:PostListProps)=>{
-
-    // const rendering = () => {
-    //     const rs = []
-        
-    //     // console.log(`rendering`)
-    //     for(let i=0; i<postList.length; i++){
-    //         rs.push(<SideBar_li key={i}>{postList[i]}</SideBar_li>);
-    //     }
-    //     return rs
-    // }
 
     const rendering = () => {
         const rs = []
