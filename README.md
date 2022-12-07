@@ -1,16 +1,15 @@
-# Next.js + TypeScript + Tailwind CSS 
+# Next.js를 이용한 기술 블로그 
 
-- SSR기능 적용
-- markdown rendering 적용
-  
-## Preview
+## Tech Stack
+- `Next.js` framework
+- `Tailwindcss` style framework
+- `TypeScript` 
 
+## Next.js 
+- `getStaticPaths` 적용
+- `getStaticProps` 적용
+- `mdx` 적용 
 
-## How to use
+## deploy And Hosting 
+- vercel 
 
-node version : 14 (and up)
-
-```bash
-npm run dev
-
-```
