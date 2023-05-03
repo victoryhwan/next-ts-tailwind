@@ -9,8 +9,6 @@ import Header from '../../../components/Header'
 import Footer from '../../../components/Footer'
 import Sidebar from '../../../components/Sidebar'
 import mdxPrism from 'mdx-prism';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypeSlug from 'rehype-slug';
 import React, { ReactNode } from 'react'
 import marked from 'marked'
 import { GetStaticPaths, GetStaticProps } from 'next';
@@ -28,32 +26,43 @@ const components = {
 type PostPageProps = {
   source: MDXRemoteSerializeResult;
   postDirArr?: []
+  meta:any
 };
 
-// type Params = {
-//   params: {
-//     slug:String
-//   }
-// }
-
-// export default function Post({source, frontMatter}:PostPageProps) {
-  const PostPage = ({ source, postDirArr }: PostPageProps) => {
-  // console.log(posts)
+const PostPage = ({ source, postDirArr, meta }: PostPageProps) => {
+  console.log(`source.scope`, JSON.stringify(source.scope))
   return (
-    <div>
-      <Header postList={postDirArr}/>
-      <div className="container mx-auto max-w-7xl">
-            <div className="lg:flex">
-                <Sidebar postList={postDirArr}/>
-                <div className="flex-auto px-4 sm:px-6 xl:px-8 pt-10 pb-24 lg:pb-16">
-                  <div className="prose dark:prose-dark p-7 mx-auto">
-                    <MDXRemote {...source} components={components} />
+    <>
+      <Head>
+        <meta name="robots" content="follow, index" />
+        <title>{meta.title}</title>
+        <meta name="description" content={meta.description} />
+        <meta property="og:site_name" content={meta.title} />
+        <meta property="og:description" content={meta.description} />
+        <meta property="og:title" content={meta.title} />
+        <meta property="og:image" content={meta.image} />
+        {/* <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@yourname" />
+        <meta name="twitter:title" content={meta.title} />
+        <meta name="twitter:description" content={meta.description} />
+        <meta name="twitter:image" content={meta.image} /> */}
+      </Head>
+      <div>
+        <Header postList={postDirArr}/>
+        <div className="container mx-auto max-w-7xl">
+              <div className="lg:flex">
+                  <Sidebar postList={postDirArr}/>
+                  <div className="flex-auto px-4 sm:px-6 xl:px-8 pt-10 pb-24 lg:pb-16">
+                    <div className="prose dark:prose-dark p-7 mx-auto">
+                      <MDXRemote {...source} components={components} />
+                    </div>
                   </div>
-                </div>
-            </div>
-        </div>
-      <Footer/>
-    </div>
+              </div>
+          </div>
+        <Footer/>
+      </div>
+    </>
+    
   )
 }
 
@@ -80,20 +89,11 @@ export async function getStaticPaths() {
 
 export const getStaticProps: GetStaticProps = async (params) => {
 
-  // console.log(`getStaticProps params : ${JSON.stringify(params)}`)
   let fileName = params.params.slug.toString()+".mdx"
-
-  // const files = fs.readdirSync(path.join('posts'), {withFileTypes: true})
-  // // console.log(files) //posts폴더의 파일명들이 나옴
-  // files.forEach((item)=>{
-  //     if(item.isDirectory()){
-  //         console.log(`${item.name} is Directory (exist)`)
-  //     }
-  // })
-  // console.log(`files[0].name : ${files[0].name}`)
 
   const postContent = fs.readFileSync(path.join(`posts/${params.params.category}`, fileName)) //posts/react 디렉토리에 있는 파일을 읽음.
   const { content, data } = matter(postContent);
+  // console.log(`data`, JSON.stringify(data))
   const mdxSource = await serialize(content, {
     // Optionally pass remark/rehype plugins
     mdxOptions: {
@@ -108,7 +108,8 @@ export const getStaticProps: GetStaticProps = async (params) => {
   return {
     props: {
       source: mdxSource,
-      postDirArr: postDirArr //사이드메뉴 리스트 정보
+      postDirArr: postDirArr, //사이드메뉴 리스트 정보
+      meta: data
     }
   }
 }
