@@ -1,0 +1,62 @@
+# CentOs 방화벽 firewall 다루기
+
+## 명령어 모음
+```shell:terminal
+//실행중인지 확인
+firewall-cmd --state
+
+//방화벽 상태확인
+systemctl status firewalld
+
+//방화벽 서비스 작동 시작
+systemctl start firewalld
+
+//방화벽 서비스 작동 중지
+systemctl stop firewalld
+
+//재부팅시 방화벽 서비스 작동 시작
+systemctl enable firewalld
+
+//재부팅시 방화벽 서비스 작동 중지
+systemctl disable firewalld
+
+//방화벽에 등록된 리스트 가져오기
+firewall-cmd --list-ports
+
+//현재 방화벽 리스트 보기
+firewall-cmd --list-all
+```
+
+_ 참고 : 리눅스에 DB를 설치하고 원격접속을 해야하는데, 방화벽때문에 원격접속이 안되는 경우가 있다. 그런경우 해당 포트를 개방하거나 보안이 필요하면, 특정ip만 허용하도록 설정하면 된다._
+
+## 방화벽 포트 열기
+```shell:terminal
+//80 포트 개방
+firewall-cmd --permanent --zone=public --add-port=80/tcp
+
+//firewall 리로드
+firewall-cmd --reload
+```
+
+## 특정 포트에 특정 ip만 허용하기 
+```shell:terminal
+//특정 아이피에 80포트 허용하기
+sudo firewall-cmd --permanent --add-rich-rule='rule family="ipv4" source address=아이피 port port="80" protocol="tcp" accept'
+
+//제거하기
+sudo firewall-cmd --permanent --remove-rich-rule='rule family="ipv4" source address=아이피 port port="80" protocol="tcp" accept'
+```
+
+## 특정ip 차단하기
+```shell:terminal
+//차단 메시지 보내주고 차단
+sudo firewall-cmd --permanent --add-rich-rule='rule family="ipv4" source address=아이피 reject' 
+
+//차단 메시지 보내주지 않고 차단
+sudo firewall-cmd --permanent --add-rich-rule='rule family="ipv4" source address=아이피 drop'
+
+
+//설정 제거하기
+sudo firewall-cmd --permanent --remove-rich-rule='rule family="ipv4" source address=아이피 reject'
+sudo firewall-cmd --permanent --remove-rich-rule='rule family="ipv4" source address=아이피 drop'
+```

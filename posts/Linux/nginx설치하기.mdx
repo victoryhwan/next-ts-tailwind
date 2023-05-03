@@ -1,0 +1,115 @@
+# CentOs Nginx 설치하기
+                                                                                                  
+
+
+```jsx:terminal
+// yum 최신화
+sudo yum update -y
+
+//nginx 설치
+sudo yum install -y nginx
+
+//nginx 시작
+sudo systemctl start nginx
+
+//nginx 재시작
+sudo systemctl restart nginx
+
+//nginx 리로드
+sudo systemctl reload nginx
+
+//nginx 상태
+sudo systemctl status nginx
+```
+
+## 확인하기
+브라우저에 해당 ip를 쳐서 접근하면, nginx 기본 페이지가 나온다.
+
+_참고: http요청은 80port, https요청은 443port 로 요청된다. _
+
+해당 페이지 html 파일은 `/usr/share/nginx/html` 에 위치해 있다.
+- index.html
+- 404.html
+- 50x.html 
+
+```shell:terminal 
+[root@localhost html]# pwd
+/usr/share/nginx/html
+[root@localhost html]# ls
+404.html  50x.html  en-US  icons  img  index.html  nginx-logo.png  poweredby.png
+[root@localhost html]# 
+```
+
+## 설정하기
+
+설정파일 위치 : `/etc/nginx/nginx.conf`
+
+```shell:terminal 
+[root@localhost html]# cd /etc/nginx/
+[root@localhost nginx]# ls
+conf.d        fastcgi.conf.default    koi-utf     mime.types.default  scgi_params          uwsgi_params.default
+default.d     fastcgi_params          koi-win     nginx.conf          scgi_params.default  win-utf
+fastcgi.conf  fastcgi_params.default  mime.types  nginx.conf.default  uwsgi_params
+```
+
+`nginx.conf` 파일을 수정하여
+`forward proxy`, `reverse proxy` 를 구성할 수 있다.
+
+```shell:nginx.conf
+# For more information on configuration, see:
+#   * Official English Documentation: http://nginx.org/en/docs/
+#   * Official Russian Documentation: http://nginx.org/ru/docs/
+
+user nginx;
+worker_processes auto;
+error_log /var/log/nginx/error.log;
+pid /run/nginx.pid;
+
+# Load dynamic modules. See /usr/share/doc/nginx/README.dynamic.
+include /usr/share/nginx/modules/*.conf;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile            on;
+    tcp_nopush          on;
+    tcp_nodelay         on;
+    keepalive_timeout   65;
+    types_hash_max_size 4096;
+
+    include             /etc/nginx/mime.types;
+    default_type        application/octet-stream;
+
+    # Load modular configuration files from the /etc/nginx/conf.d directory.
+    # See http://nginx.org/en/docs/ngx_core_module.html#include
+    # for more information.
+    include /etc/nginx/conf.d/*.conf;
+
+    server {
+        listen       80;
+        listen       [::]:80;
+        server_name  _;
+        root         /usr/share/nginx/html;
+
+        # Load configuration files for the default server block.
+        include /etc/nginx/default.d/*.conf;
+
+        error_page 404 /404.html;
+        location = /404.html {
+        }
+
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+        }
+    }
+}
+
+``` 
