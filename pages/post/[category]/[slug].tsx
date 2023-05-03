@@ -45,9 +45,9 @@ type PostPageProps = {
       <div className="container mx-auto max-w-7xl">
             <div className="lg:flex">
                 <Sidebar postList={postDirArr}/>
-                <div className="min-w-0 flex-auto px-4 sm:px-6 xl:px-8 pt-10 pb-24 lg:pb-16">
-                  <div className="prose dark:prose-dark p-7 mx-auto max-w-max">
-                    <MDXRemote {...source} components={components}/>
+                <div className="flex-auto px-4 sm:px-6 xl:px-8 pt-10 pb-24 lg:pb-16">
+                  <div className="prose dark:prose-dark p-7 mx-auto">
+                    <MDXRemote {...source} components={components} />
                   </div>
                 </div>
             </div>

@@ -17,6 +17,10 @@
   }
 }
 
+.prose {
+  @apply max-w-screen-lg !important;
+}
+
 /* Post styles */
 .prose pre {
   @apply bg-gray-200 border border-gray-200 dark:border-gray-700 dark:bg-gray-900;
