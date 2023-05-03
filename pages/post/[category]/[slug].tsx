@@ -80,7 +80,7 @@ export async function getStaticPaths() {
 
 export const getStaticProps: GetStaticProps = async (params) => {
 
-  console.log(`getStaticProps params : ${JSON.stringify(params)}`)
+  // console.log(`getStaticProps params : ${JSON.stringify(params)}`)
   let fileName = params.params.slug.toString()+".mdx"
 
   // const files = fs.readdirSync(path.join('posts'), {withFileTypes: true})
