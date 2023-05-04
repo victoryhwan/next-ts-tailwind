@@ -1,7 +1,8 @@
-import Head from 'next/head'
+
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Sidebar from '../components/Sidebar'
+import MetaHead from '../components/MetaHead'
 import React, { ReactNode } from 'react'
 import Link from 'next/link';
 import { GetStaticPaths, GetStaticProps } from 'next';
@@ -13,26 +14,30 @@ type Props = {
 
 export default function Home({postDirArr}:Props) {
   return (
-    <div className="">
-      <Header postList={postDirArr}/>
-      {/* <Sidebar postList={postDirArr}/> */}
-      {/* <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-yellow-500"> */}
-        <div className="container mx-auto max-w-7xl bg-gray-100">
-            <div className="lg:flex">
-                <Sidebar postList={postDirArr}/>
-                <div className="min-w-0 flex-auto px-4 sm:px-6 xl:px-8 pt-10 pb-24 lg:pb-16">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-8">
-                    {
-                    postDirArr.map((item, index) => {
-                      return <Section key={index} categoryName={item.name}/>
-                    })
-                  }
+    <>
+      <MetaHead title={''} description={'Justin의 블로그입니다.'} />
+      <div className="">
+        <Header postList={postDirArr}/>
+        {/* <Sidebar postList={postDirArr}/> */}
+        {/* <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-yellow-500"> */}
+          <div className="container mx-auto max-w-7xl bg-gray-100">
+              <div className="lg:flex">
+                  <Sidebar postList={postDirArr}/>
+                  <div className="min-w-0 flex-auto px-4 sm:px-6 xl:px-8 pt-10 pb-24 lg:pb-16">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-8">
+                      {
+                      postDirArr.map((item, index) => {
+                        return <Section key={index} categoryName={item.name}/>
+                      })
+                    }
+                    </div>
                   </div>
-                </div>
-            </div>
-        </div>
-      <Footer/>
-    </div>
+              </div>
+          </div>
+        <Footer/>
+      </div>
+    </>
+    
   )
 }
 

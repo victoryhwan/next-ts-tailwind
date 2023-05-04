@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import Sidebar from '../../components/Sidebar'
+import MetaHead from '../../components/MetaHead'
 import React, { ReactNode } from 'react'
 import Link from 'next/link';
 import { GetStaticPaths, GetStaticProps } from 'next';
@@ -21,24 +22,28 @@ type PostInfoProps = {
 const CategoryListPage = ({ postDirArr, postList, categoryName}: CategoryListProps) => {
     // console.log(posts)
     return (
-      <div>
-        <Header postList={postDirArr}/>
-        <div className="container mx-auto max-w-7xl bg-gray-100">
-              <div className="lg:flex">
-                  <Sidebar postList={postDirArr}/>
-                  <div className="min-w-0 flex-auto px-4 sm:px-6 xl:px-8 pt-10 pb-24 lg:pb-16">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-8">
-                      {
-                        postList[0].posts.map((item, index) => {
-                          return <Section key={index} categoryName={categoryName} postName={item.substring(0,item.length-4)}/>
-                        })
-                      }
+      <>
+        <MetaHead title={categoryName} description={categoryName} />
+        <div>
+          <Header postList={postDirArr}/>
+          <div className="container mx-auto max-w-7xl bg-gray-100">
+                <div className="lg:flex">
+                    <Sidebar postList={postDirArr}/>
+                    <div className="min-w-0 flex-auto px-4 sm:px-6 xl:px-8 pt-10 pb-24 lg:pb-16">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-8">
+                        {
+                          postList[0].posts.map((item, index) => {
+                            return <Section key={index} categoryName={categoryName} postName={item.substring(0,item.length-4)}/>
+                          })
+                        }
+                      </div>
                     </div>
-                  </div>
-              </div>
-          </div>
-        <Footer/>
-      </div>
+                </div>
+            </div>
+          <Footer/>
+        </div>
+      </>
+      
     )
 }
 

@@ -8,6 +8,7 @@ import { serialize } from 'next-mdx-remote/serialize';
 import Header from '../../../components/Header'
 import Footer from '../../../components/Footer'
 import Sidebar from '../../../components/Sidebar'
+import MetaHead from '../../../components/MetaHead';
 import mdxPrism from 'mdx-prism';
 import React, { ReactNode } from 'react'
 import marked from 'marked'
@@ -33,20 +34,7 @@ const PostPage = ({ source, postDirArr, meta }: PostPageProps) => {
   console.log(`source.scope`, JSON.stringify(source.scope))
   return (
     <>
-      <Head>
-        <meta name="robots" content="follow, index" />
-        <title>{meta.title}</title>
-        <meta name="description" content={meta.description} />
-        <meta property="og:site_name" content={meta.title} />
-        <meta property="og:description" content={meta.description} />
-        <meta property="og:title" content={meta.title} />
-        <meta property="og:image" content={meta.image} />
-        {/* <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@yourname" />
-        <meta name="twitter:title" content={meta.title} />
-        <meta name="twitter:description" content={meta.description} />
-        <meta name="twitter:image" content={meta.image} /> */}
-      </Head>
+      <MetaHead title={meta.title} description={meta.description} image={meta.image}/>
       <div>
         <Header postList={postDirArr}/>
         <div className="container mx-auto max-w-7xl">
