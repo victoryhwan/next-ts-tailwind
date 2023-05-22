@@ -1,0 +1,30 @@
+---
+title: Vue3에서 cookie 사용하기
+description: Vue3에서 cookie 사용하기
+date: ''
+image: '/images/jenkins.jpg'
+---
+
+# Vue3에서 cookie 사용하기
+
+`vue3` 에서 cookie를 다루기 위해서는 `vue3-cookies`를 사용한다.
+
+```shell:terminal
+npm install vue3-cookies --save
+```
+
+
+예제 소스코드
+```javascript:Component.vue
+import { useCookies } from "vue3-cookies";
+
+const { cookies } = useCookies();
+
+cookies.set('accessToken', access_token) //쿠키 추가
+const accessToken = cookies.get('accessToken'); //쿠키 값 가져오기
+cookies.remove('accessToken') //쿠키 제거
+
+```
+
+공식문서 참고
+https://www.npmjs.com/package/vue3-cookies
