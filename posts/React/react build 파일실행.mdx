@@ -6,14 +6,15 @@ image: '/images/jenkins.jpg'
 ---
 
 # React Build 파일 node.js Express Server에서 실행하기 
-React는 Html을 만드는 라이브러리이다. <br/>
+`React`는 UI개발을 편하게 개발할 수 있는 라이브러리이다. <br/>
 리액트 빌드된 파일만으로 로컬환경에서`npm run dev`와 같은 실행은 되지 않는다. <br/>
 클라이언트에게 리소스 파일을 전달해주는 서버가 있어야 한다. (ex:node.js or spring)
 
 ### Node.js (Express) 로 React build 파일을 연동하는 방법을 알아보았다. 
 
-`npm run build`를 하면 build폴더에 빌드된 파일이 생기는데 리액트에서는 이 build폴더만 있으면 된다. <br/>
-
+`npm run build`를 하면 `build` 폴더에 빌드된 파일이 생기는데 `Vue.js` 와 `React` 에서는 이 `build` 폴더 안에 있는 파일이 최종적인 결과물이라고 보면된다. <br/>
+_참고로 빌드 관련하여 `gulp`, `webpack`, `vite`가 대표적으로 많이 쓰이고 있는데, 현재 기준으로 `React` 프로젝트에 가장 많이 쓰이는 빌드 도구는 `webpack`으로 알고 있고 검색 자료도 상당히 많이 있다.
+그 다음이 `vite`인데 `vite`는 `webpack` 이후에 나온 개발툴이며 상대적으로 빌드속도가 빠르다. 최근에 진행중인 프로젝트에 모두 `vite`를 사용하고 있다._
 
 Node.js 소스코드는 아래와 같다 (심플함)
 ```javascript:app.js
@@ -44,5 +45,9 @@ app.get("*", (req, res) => {
 node.js 서버에 build 폴더를 넣고  
 `node app.js` 로 node.js express 서버를 실행하면  
 리액트로 만든 페이지를 볼 수 있다. 
+
+왜 이렇게 해야하는지에 대해서는
+서버와 클라이언트(웹브라우저)가 어떻게 통신을 하는지,
+그리고 웹브라우저에서 html과 javascript가 어떻게 동작되는지 이해하고 있으면 된다.
 
 
